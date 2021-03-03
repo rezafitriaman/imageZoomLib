@@ -68,6 +68,7 @@
     "@babel/preset-env": "^7.12.7",
     "babel-loader": "^8.0.0-beta.0",
     "babel-polyfill": "^6.26.0",
+    "bootstrap": "^5.0.0-beta2",
     "handlebars": "^4.7.6",
     "handlebars-loader": "^1.7.1",
     "html-minifier": "^4.0.0",

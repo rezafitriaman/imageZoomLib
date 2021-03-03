@@ -10,29 +10,38 @@
   <link rel="manifest" href="img/site.webmanifest">
   <title>Zoom image</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
-
 </head>
 
 <body>
   <section class="content">
-    <h1>Image Zoom</h1>
-
-    <p>Mouse over the image:</p>
-
-    <div class="img-zoom-container">
-      <img id="myimage" src="img_girl.jpg" width="300" height="240">
-      <div id="myresult" class="img-zoom-result"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <h1 class="title">Image Zoom</h1>
+          <p>Mouse over the image:</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="img-zoom-container"> 
+            <img id="myimage" src="./img/bergen.jpg" class="responsive">
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div id="myresult" class="img-zoom-result"></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <p>The image must be placed inside a container with relative positioning.</p>
+          <p>The result can be put anywhere on the page, but must have the class name "img-zoom-result".</p>
+          <p>Make sure both the image and the result have IDs. These IDs are used when a javaScript initiates the zoom
+            effect.
+          </p>
+        </div>
+      </div>
     </div>
-
-    <p>The image must be placed inside a container with relative positioning.</p>
-    <p>The result can be put anywhere on the page, but must have the class name "img-zoom-result".</p>
-    <p>Make sure both the image and the result have IDs. These IDs are used when a javaScript initiates the zoom effect.
-    </p>
   </section>
-
-
-
-
 </body>
 
 </html>

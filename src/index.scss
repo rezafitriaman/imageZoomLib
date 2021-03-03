@@ -1,6 +1,38 @@
 @use "~normalize-scss/sass/normalize";
+@use "~bootstrap/scss/bootstrap-reboot";
+@use "~bootstrap/scss/bootstrap-grid";
 @import "./common";
 
-.content {
+.responsive {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
 
+.content {
+  .title {
+    margin-top: 15px;
+  }
+
+  .img-zoom-container {
+    position: relative;
+    margin-bottom: 15px;
+  }
+
+  .img-zoom-result {
+    border: 1px solid #d4d4d4;
+    background-repeat: no-repeat;
+    /*set the size of the result div:*/
+/*     width: 300px;
+    height: 300px; */
+  }
+
+  .img-zoom-lens {
+    position: absolute;
+    border: 2px solid hotpink;
+    /* width: 60px */
+    /*set the size of the lens:*/
+/*     width: 40px;
+    height: 40px; */
+  }
 }
