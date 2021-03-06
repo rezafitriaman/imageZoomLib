@@ -6,7 +6,7 @@ module.exports = {
   },
   "extends": ["eslint:recommended"],
   "rules": {
-    "no-unused-vars": "off",
+    "no-unused-vars": "warn",
     "no-console": ["off", { "allow": ["warn", "error", "info"] }]
   },
   "env": {
@@ -15,5 +15,9 @@ module.exports = {
     "commonjs": true, 
     "es6": true
   },
+  "predef": [
+    "describe",
+    "it"
+  ],
   "ignorePatterns": ["src/banners/mainBanner/icons/*"]
 };

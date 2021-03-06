@@ -56,29 +56,16 @@ export class ZoomImage {
 
     this.ifImgOriginLoaded(create);
   }
-  ifImgOriginLoaded(create: Function): Function {
-    let isLoaded: boolean = this.originImgElm!.complete && this.originImgElm!.naturalHeight !== 0;
-
-  
+  ifImgOriginLoaded(create: Function): void {
     if (!this.originImgElm!.complete && this.originImgElm!.naturalHeight !== 0) {
       this.originImgElm!.addEventListener("load", () => {
-        console.log(this.originImgElm!.naturalHeight)
-        console.log('bb', this.originImgElm!.complete && this.originImgElm!.naturalHeight !== 0)
-        if (!this.originImgElm!.complete && this.originImgElm!.naturalHeight !== 0) {
-          console.log( 'cc', this.originImgElm!.complete && this.originImgElm!.naturalHeight !== 0)
-          let checks = setInterval(() =>{ 
-            console.log('cecks')
-            clearInterval(checks)
-            console.log( 'dd',this.originImgElm!.complete && this.originImgElm!.naturalHeight !== 0)
-            return create();
-           }, 100);
-        }
-        
         return create();
       });
-    } 
-    console.log('aa', this.originImgElm!.complete && this.originImgElm!.naturalHeight !== 0)
-    return create(); 
+    }  
+
+    setTimeout(() => {
+      return create(); 
+    },50)
   }
   createResult(): void {
     const create = (): void => {
