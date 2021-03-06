@@ -6,12 +6,11 @@ enum BorderX {
     None,
   }
 
-  enum BorderY {
-    Bottom,
-    Top,
-    None,
-  }
-
+enum BorderY {
+  Bottom,
+  Top,
+  None,
+}
 export class ZoomImage {
   protected originImgElm: HTMLImageElement;
   protected resultImgElm: HTMLImageElement;
@@ -19,7 +18,7 @@ export class ZoomImage {
   protected scaleDown: number;
   protected center: boolean | undefined;
 
-  constructor(
+  constructor (
     originImgElm: HTMLImageElement,
     resultImgElm: HTMLImageElement,
     center?: boolean | undefined
@@ -52,22 +51,34 @@ export class ZoomImage {
         this.lens.style.top = `${
           originImgElmHeight / 2 - originImgElmHeight_scaledDown / 2
         }px`;
-      }
+      } 
     };
 
-    this.ifOriginLoaded(create);
+    this.ifImgOriginLoaded(create);
   }
-  ifOriginLoaded(create: Function) {
-    let isLoaded: boolean =
-      this.originImgElm!.complete && this.originImgElm!.naturalHeight !== 0;
+  ifImgOriginLoaded(create: Function): Function {
+    let isLoaded: boolean = this.originImgElm!.complete && this.originImgElm!.naturalHeight !== 0;
 
-    if (!isLoaded) {
-      window.addEventListener("load", () => {
-        create();
+  
+    if (!this.originImgElm!.complete && this.originImgElm!.naturalHeight !== 0) {
+      this.originImgElm!.addEventListener("load", () => {
+        console.log(this.originImgElm!.naturalHeight)
+        console.log('bb', this.originImgElm!.complete && this.originImgElm!.naturalHeight !== 0)
+        if (!this.originImgElm!.complete && this.originImgElm!.naturalHeight !== 0) {
+          console.log( 'cc', this.originImgElm!.complete && this.originImgElm!.naturalHeight !== 0)
+          let checks = setInterval(() =>{ 
+            console.log('cecks')
+            clearInterval(checks)
+            console.log( 'dd',this.originImgElm!.complete && this.originImgElm!.naturalHeight !== 0)
+            return create();
+           }, 100);
+        }
+        
+        return create();
       });
-    } else {
-      create();
-    }
+    } 
+    console.log('aa', this.originImgElm!.complete && this.originImgElm!.naturalHeight !== 0)
+    return create(); 
   }
   createResult(): void {
     const create = (): void => {
@@ -75,10 +86,8 @@ export class ZoomImage {
       const resultHeight: number = this.originImgElm!.getBoundingClientRect().height;
       const cx: number = resultWidth / (resultWidth / this.scaleDown);
       const cy: number = resultHeight / (resultHeight / this.scaleDown);
-      const resultWidthElmWidth_scaledDown: number =
-        resultWidth / this.scaleDown;
-      const resultWidthElmHeight_scaledDown: number =
-        resultHeight / this.scaleDown;
+      const resultWidthElmWidth_scaledDown: number = resultWidth / this.scaleDown;
+      const resultWidthElmHeight_scaledDown: number = resultHeight / this.scaleDown;
 
       this.resultImgElm.style.width = `${resultWidth}px`;
       this.resultImgElm.style.height = `${resultHeight}px`;
@@ -86,15 +95,12 @@ export class ZoomImage {
       this.resultImgElm.style.backgroundSize = `${resultWidth * cx}px ${resultHeight * cy}px`;
 
       if (this.center) {
-        this.resultImgElm.style.backgroundPosition = `-${
-          (resultWidth / 2 - resultWidthElmWidth_scaledDown / 2) * cx
-        }px -${
-          (resultHeight / 2 - resultWidthElmHeight_scaledDown / 2) * cy
-        }px `;
+        this.resultImgElm.style.backgroundPosition = 
+        `-${(resultWidth / 2 - resultWidthElmWidth_scaledDown / 2) * cx}px -${(resultHeight / 2 - resultWidthElmHeight_scaledDown / 2) * cy}px `;
       }
     };
 
-    this.ifOriginLoaded(create);
+    this.ifImgOriginLoaded(create);
   }
   getCursorPos = (event: MouseEvent | TouchEvent): CursorPos => {
     let cursorX: number = 0;
@@ -107,10 +113,8 @@ export class ZoomImage {
       (event as MouseEvent).pageY ||
       ((event as TouchEvent).changedTouches &&
         (event as TouchEvent).changedTouches[0].pageY);
-    let originImgElm_lef_Post: number = this.originImgElm.getBoundingClientRect()
-      .left;
-    let originImgElm_top_Post: number = this.originImgElm.getBoundingClientRect()
-      .top;
+    let originImgElm_lef_Post: number = this.originImgElm.getBoundingClientRect().left;
+    let originImgElm_top_Post: number = this.originImgElm.getBoundingClientRect().top;
 
     cursorX = cursorPage_X_Post - originImgElm_lef_Post;
     cursorY = cursorPage_Y_Post - originImgElm_top_Post;
@@ -174,6 +178,10 @@ export class ZoomImage {
   init(): void {
     this.createLens();
     this.createResult();
+    window.addEventListener("resize", () => {
+      this.createLens();
+      this.createResult();
+    }, false);
     this.lens.addEventListener("mousemove", (event) => {
       this.moveLens(event);
     });

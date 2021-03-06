@@ -1,12 +1,8 @@
-# webpack-bootstrap
-webpack base tool
 
-core concepts
-    entry
-    output
-    loaders
-    plugins
-    mode
-    browser compatibility
+Markup :  # Heading 1 #
 
-TODO module federation
+Run container locally on dev mode:
+
+```shell
+docker-compose -f docker-compose.dev.yml up --build
+```

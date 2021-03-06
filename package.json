@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "webpack --watch",
     "start": "webpack serve --watch --config webpack.config.dev.js --env NODE_ENV=local --env production=false",
-    "build": "webpack --config webpack.config.prod.js --env NODE_ENV=local --env production=true"
+    "build": "webpack serve --config webpack.config.prod.js --env NODE_ENV=local --env production=true"
   },
   "repository": {
     "type": "git",

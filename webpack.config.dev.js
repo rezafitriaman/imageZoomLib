@@ -1,7 +1,6 @@
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const ESLintPlugin = require("eslint-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
-//const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
@@ -22,9 +21,6 @@ module.exports = (env) => {
     watchOptions: {
       ignored: /node_modules/,
     },
-    //performance: {
-      //hints: 'warning'
-    //},
     devServer: {
       host: "0.0.0.0",
       port: 8081,
@@ -41,7 +37,6 @@ module.exports = (env) => {
         failOnError: true,
         failOnWarning: true,
         emitWarning: true,
-        //eslintPath: path.resolve(__dirname, ".eslintrc.json")
       }),
       new CopyPlugin({
         patterns: [

@@ -14,11 +14,19 @@ module.exports = (env) => {
 
   return {
     mode: "production",
-    entry: "./src/index.ts",
+    entry: {
+      index: "./src/index.ts",
+    },
     target: "web",
     devtool: "source-map",
     performance: {
       hints: "warning",
+    },
+    devServer: {
+      host: "0.0.0.0",
+      port: 8081,
+      writeToDisk: true,
+      contentBase: path.join(__dirname, "dist"),
     },
     plugins: [
       new ESLintPlugin({
@@ -33,7 +41,8 @@ module.exports = (env) => {
       new HtmlWebpackPlugin({
         title: "production",
         template: "src/index.hbs",
-      }),
+        inject: "body"
+      }), 
       new MiniCssExtractPlugin({
         filename: "[name].css",
         chunkFilename: "[id].css",
@@ -41,9 +50,9 @@ module.exports = (env) => {
       }),
     ],
     output: {
-      filename: "[name].[contenthash].bundle.js",
+      filename: "[name].bundle.js",
       path: path.resolve(__dirname, "dist"),
-      publicPath: "/",
+      publicPath: "./",
     },
     module: {
       rules: [
